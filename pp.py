@@ -8,9 +8,10 @@ import __main__
 import glob
 
 class ParallelDF:
-    def __init__(self, df=None, fun=None):
+    def __init__(self, df=None, fun=None, arg=None):
         self.whole_df = df
         self.process_fun = fun.__name__
+        self.simple_arg = arg
         # self.module_name = os.path.basename(__main__.__file__).strip(".py")
         self.module_name = __main__.__file__[__main__.__file__.rfind('/') + 1:-3]
         self.num_cpu = 10
@@ -26,9 +27,9 @@ import sys
 print(sys.argv)
 idx = (sys.argv[1])
 df = pd.read_parquet('_tmp_input/'+str(idx)+'.parquet')
-df = {fun_name}(df)
+df = {fun_name}(df,{arg})
 df.to_parquet('_tmp_output/'+str(idx)+'.parquet')
-'''.format(fun_name=self.process_fun, module_name=self.module_name)
+'''.format(fun_name=self.process_fun, module_name=self.module_name, arg=self.simple_arg)
 
     def init(self):
         os.system('mkdir _tmp_input')
