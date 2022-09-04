@@ -1,22 +1,12 @@
 #!/bin/bash
 set -e
+# when use this file
+# pls comment the last executable line in pp.sh
+source ./pp.sh
+
 for ln in 1 2 3
 do
-  # step0: set variable
-  df_path=input.csv
-  num_cpu=4
-  output_file=result.csv
-  # step1: split df
-  mkdir _tmp_input
-  mkdir _tmp_output
-  python pp_split_df.py $df_path $num_cpu
-  # step2: parallel run
-  for i in {0..3}
-  do
-    python app.py $i
-  done
-  # step3: merge
-  python pp_merge_df.py $output_file $num_cpu
-  rm -r _tmp_input
-  rm -r _tmp_output
+  para_fun $df_path $num_cpu $output_file $exe_script
 done
+
+#'hdfs:///projects/mpi_clsfspu/hive/dev_mpi_clsfspu/tmp_dwd_attribute_to_check_with_cate_id_hrx/global_be_category_id={}'.format(leafnode_id)
