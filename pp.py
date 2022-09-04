@@ -42,6 +42,7 @@ df.to_parquet('_tmp_output/'+str(idx)+'.parquet')
         os.system('rm -r _tmp_input')
         os.system('rm -r _tmp_output')
         os.system('rm -r _tmp_log')
+        os.system('rm '+self.script_path)
 
     def split_df(self):
         df_len = math.ceil(len(self.whole_df) / self.num_cpu)
